@@ -102,7 +102,7 @@ class ADUser(ADObject):
                 memberof = [g[0] for g in self.adq.search(base_dn,
                                                           '(member:1.2.840.113556.1.4.1941:={0})'.\
                                                           format(search_result[0]),
-                                                          attributes=['memberof'])]
+                                                          attributes=['memberof']) if g[0]]
                 adu.memberof = memberof
             ad_users.append(adu)
 
