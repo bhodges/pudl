@@ -97,7 +97,7 @@ class ADQuery(object):  #pylint: disable=too-few-public-methods
             data, server_controls = self.ldap.result3(message_id)[1::2]
             self.sprc.cookie = server_controls[0].cookie
             logging.debug('%s - Page %s results: %s',  \
-                          self.__class__.__name__, page, ', '.join(k[0] for k in data))
+                          self.__class__.__name__, page, ', '.join(k[0] for k in data if k[0]))
             results += [u for u in data]
 
         return results
