@@ -96,6 +96,8 @@ class ADUser(ADObject):
         results = self.adq.search(base_dn, search_filter, attributes)
 
         for search_result in results:
+            if not search_result[0]:
+                continue
             adu = self._object_factory(search_result)
             # Each results index 0 of the tuple is the DN
             if not explicit_membership_only and 'memberof' in dir(adu):
