@@ -95,11 +95,13 @@ class ADGroup(ADObject):
         results = self.adq.search(base_dn, search_filter, attributes)
 
         for search_result in results:
+            if not search_result[0]:
+                continue
             adg = self._object_factory(search_result)
             if not explicit_membership_only and 'member' in dir(adg):
                 member = [u[0] for u in
                           self.adq.search(base_dn, '(memberOf:1.2.840.113556.1.4.1941:={0})'.\
-                          format(search_result[0]), attributes=['member'])]
+                          format(search_result[0]), attributes=['member']) if u[0]]
                 adg.member = member
             ad_groups.append(adg)
 
