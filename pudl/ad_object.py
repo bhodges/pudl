@@ -83,7 +83,7 @@ class ADObject(object):
 
         results = self.adq.search(base_dn, search_filter, attributes)
 
-        mappings = {result[0]: result[1]['sAMAccountName'][0] for result in results}
+        mappings = {result[0]: result[1]['sAMAccountName'][0] for result in results if result[0]}
 
         return mappings
 
